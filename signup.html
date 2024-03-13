@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0872db;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #15a6da;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+        }
+
+        .signup-form {
+            text-align: center;
+        }
+
+        h2 {
+            color: #000000;
+        }
+
+        .input-container {
+            position: relative;
+            margin: 10px 0;
+            padding: 10px 0; /* Add padding to the top and bottom */
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            font-size: 16px;
+            color: #0a0a0a;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #007bff;
+        }
+
+        label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 10px;
+            font-size: 16px;
+            color: #100f0f;
+            pointer-events: none;
+            transition: transform 0.3s, top 0.3s, font-size 0.3s;
+        }
+
+        input:valid + label,
+        input:focus + label {
+            transform: translateY(-20px);
+            top: 0;
+            font-size: 12px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            color: #4d2a2a;
+            margin-top: 10px;
+        }
+
+        a {
+            color: #341919;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="signup-form">
+            <h2>Sign Up</h2>
+            <div class="input-container">
+                <input type="text" id="full-name" name="full-name" required>
+                <label for="full-name">Full Name</label>
+            </div>
+            <div class="input-container">
+                <input type="email" id="email" name="email" required>
+                <label for="email">Email Address</label>
+            </div>
+            <div class="input-container">
+                <input type="password" id="password" name="password" required>
+                <label for="password">Password</label>
+            </div>
+            <button type="submit">Sign Up</button>
+            <p>Already have an account? <a href="login.html">Login here</a></p>
+        </form>
+    </div>
+</body>
+</html>

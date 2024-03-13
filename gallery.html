@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Room Management System Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        header {
+            background-color: #354c6e;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 1000px;
+        }
+
+        .image {
+            position: relative;
+            overflow: hidden;
+            width: 250px; /* Set a fixed width for square images */
+            height: 250px; /* Set a fixed height for square images */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Maintain aspect ratio while covering the square container */
+            display: block;
+            transition: transform 0.2s;
+        }
+
+        .image:hover {
+            transform: scale(1.05);
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Room Management System Gallery</h1>
+    </header>
+
+    <div class="gallery">
+        <div class="image">
+            <img src="room1.jpeg" alt="Meeting Room 1">
+            <div class="caption">Meeting Room 1</div>
+        </div>
+
+        <div class="image">
+            <img src="room2.jpeg" alt="Conference Room 1">
+            <div class="caption">Living Room 1</div>
+        </div>
+
+        <div class="image">
+            <img src="room3.jpeg" alt="Office Space 1">
+            <div class="caption">Living Room 2</div>
+        </div>
+
+        <div class="image">
+            <img src="room4.jpeg" alt="Conference Room 2">
+            <div class="caption">Low Space Room 2</div>
+        </div>
+
+        <div class="image">
+            <img src="room5.jpeg" alt="Conference Room 2">
+            <div class="caption">Conference Room </div>
+        </div>
+
+        <div class="image">
+            <img src="room6.jpeg" alt="Conference Room 2">
+            <div class="caption">Conference Room 2</div>
+        </div>
+        <!-- Add more images and captions as needed -->
+    </div>
+</body>
+</html>
