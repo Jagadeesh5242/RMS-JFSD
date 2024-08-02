@@ -6,13 +6,14 @@
         body {
             margin: 0;
             overflow: hidden;
-            background-color: transparent;
         }
 
         .room {
             width: 100vw;
             height: 100vh;
-            background: url('emptyroom.jpg') center/cover no-repeat;
+            background-image: url('emptyroom.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
             position: relative;
         }
 
@@ -53,10 +54,16 @@
             left: 50px;
         }
 
-        .save-button {
+        .button-container {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .button {
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -64,10 +71,15 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        .save-button:hover {
+        .button:hover {
             background-color: #0056b3;
+        }
+
+        input[type="file"] {
+            display: none;
         }
     </style>
 </head>
@@ -77,8 +89,15 @@
         <div class="object" id="table" draggable="true"></div>
         <div class="object" id="plant" draggable="true"></div>
         <div class="object" id="lamp" draggable="true"></div>
-        <button class="save-button" onclick="saveDesign()">Save</button>
+        <div class="button-container">
+            <button class="button" id="add-object-button">Add Object</button>
+            <button class="button" id="add-background-button">Change Background</button>
+        </div>
     </div>
+
+    <input type="file" id="object-input" accept="image/*" multiple>
+    <input type="file" id="background-input" accept="image/*">
+
     <script>
         let activeItem = null;
         let activeX = 0;
@@ -103,26 +122,50 @@
             activeItem = null;
         });
 
-        function saveDesign() {
-            // Save the design data
-            const designData = {
-                chair: { top: document.getElementById('chair').style.top, left: document.getElementById('chair').style.left },
-                table: { top: document.getElementById('table').style.top, left: document.getElementById('table').style.left },
-                plant: { top: document.getElementById('plant').style.top, left: document.getElementById('plant').style.left },
-                lamp: { top: document.getElementById('lamp').style.top, left: document.getElementById('lamp').style.left },
-            };
-            
-            // Get the existing saved designs or initialize an empty array
-            let savedDesigns = JSON.parse(localStorage.getItem('savedDesigns')) || [];
-            
-            // Add the current design to the array
-            savedDesigns.push(designData);
-            
-            // Save the updated array in local storage
-            localStorage.setItem('savedDesigns', JSON.stringify(savedDesigns));
+        document.getElementById('add-object-button').addEventListener('click', () => {
+            document.getElementById('object-input').click();
+        });
 
-            alert("Design saved!");
-        }
+        document.getElementById('object-input').addEventListener('change', function() {
+            const files = this.files;
+            for (const file of files) {
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const newObject = document.createElement('div');
+                        newObject.classList.add('object');
+                        newObject.style.backgroundImage = `url(${e.target.result})`;
+                        newObject.style.top = '50px';
+                        newObject.style.left = '50px';
+                        newObject.draggable = true;
+
+                        newObject.addEventListener("mousedown", (e) => {
+                            activeItem = newObject;
+                            activeX = e.clientX - newObject.getBoundingClientRect().left;
+                            activeY = e.clientY - newObject.getBoundingClientRect().top;
+                        });
+
+                        document.querySelector('.room').appendChild(newObject);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+
+        document.getElementById('add-background-button').addEventListener('click', () => {
+            document.getElementById('background-input').click();
+        });
+
+        document.getElementById('background-input').addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.querySelector('.room').style.backgroundImage = `url(${e.target.result})`;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
     </script>
 </body>
 </html>
