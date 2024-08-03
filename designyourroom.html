@@ -92,7 +92,9 @@
         <div class="button-container">
             <button class="button" id="add-object-button">Add Object</button>
             <button class="button" id="add-background-button">Change Background</button>
+            <button class="button" id="saveButton">Save Screenshot</button>
         </div>
+        
     </div>
 
     <input type="file" id="object-input" accept="image/*" multiple>
@@ -166,6 +168,30 @@
                 reader.readAsDataURL(file);
             }
         });
+        document.getElementById('saveButton').addEventListener('click', function() { 
+            // Take a screenshot of the entire page 
+            html2canvas(document.body).then(function(canvas) { 
+                // Convert the canvas to a blob 
+                canvas.toBlob(function(blob) { 
+                    // Create an anchor element and set the download attribute with a filename 
+                    var link = document.createElement('a'); 
+                    link.href = URL.createObjectURL(blob); 
+                    link.download = 'screenshot.png'; 
+                     
+                    // Append the anchor to the body 
+                    document.body.appendChild(link); 
+                     
+                    // Programmatically click the anchor to trigger the download 
+                    link.click(); 
+                     
+                    // Remove the anchor from the document 
+                    document.body.removeChild(link); 
+                }); 
+            }); 
+        }); 
     </script>
+     <!-- Include the html2canvas library --> 
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> 
+     
 </body>
 </html>
